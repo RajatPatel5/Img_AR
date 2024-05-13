@@ -22,6 +22,7 @@ public class ImageTrackerManager : MonoBehaviour
 
     void Awake()
     {
+        Application.targetFrameRate = 60;
         //initialized tracked image manager  
         arTrackedImageManager = GetComponent<ARTrackedImageManager>();
     }
