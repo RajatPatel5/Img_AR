@@ -522,8 +522,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 20
-  field of view: 60
+  far clip plane: 400.8
+  field of view: 39.9
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1066,7 +1066,7 @@ MonoBehaviour:
   m_ImageLibrary: {fileID: 11400000, guid: 3048d81b7bbc54a79b3055807f9bf79b, type: 2}
   m_OnePrefab: {fileID: 1744711924718852477, guid: 7d287d2c98952bf47a0abdf5706f4854,
     type: 3}
-  m_TwoPrefab: {fileID: 5722726590925913014, guid: 73ab94858c7e623429ecb69776ac0b07,
+  m_TwoPrefab: {fileID: 4256888541191894585, guid: a03aa33b3e9d547489f24e7823e94f40,
     type: 3}
 --- !u!1 &2512387470665874425
 GameObject:
