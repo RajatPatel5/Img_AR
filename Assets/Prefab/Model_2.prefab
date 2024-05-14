@@ -43,7 +43,7 @@ PrefabInstance:
     - target: {fileID: 558783396478349008, guid: 73ab94858c7e623429ecb69776ac0b07,
         type: 3}
       propertyPath: scaleMax
-      value: 0.45
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 558783396478349008, guid: 73ab94858c7e623429ecb69776ac0b07,
         type: 3}
@@ -58,7 +58,7 @@ PrefabInstance:
     - target: {fileID: 558783396478349008, guid: 73ab94858c7e623429ecb69776ac0b07,
         type: 3}
       propertyPath: sensitivity
-      value: 0.025
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 4909175583933620492, guid: 73ab94858c7e623429ecb69776ac0b07,
         type: 3}
