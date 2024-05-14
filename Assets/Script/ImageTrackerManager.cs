@@ -77,7 +77,13 @@ public class ImageTrackerManager : MonoBehaviour
         // Give the initial image a reasonable default scale
         allObjects[imageName].transform.localScale = new Vector3(0.0001f, 0.0001f, 0.0001f);
     }
-
+    void DeactivateTrackedObject(string imageName)
+    {
+        Debug.Log("Tracked the target: " + imageName);
+        allObjects[imageName].SetActive(false);
+        // Give the initial image a reasonable default scale
+        
+    }
     private void UpdateTrackedObject(ARTrackedImage trackedImage)
     {
         //if tracked image tracking state is comparable to tracking
@@ -115,7 +121,7 @@ public class ImageTrackerManager : MonoBehaviour
         foreach (var trackedImage in args.removed)
         {
             // destroy the AR object associated with the tracked image
-            Destroy(trackedImage.gameObject);
+            DeactivateTrackedObject(trackedImage.referenceImage.name);
         }
     }
 
