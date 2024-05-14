@@ -1066,7 +1066,7 @@ MonoBehaviour:
   m_ImageLibrary: {fileID: 11400000, guid: 3048d81b7bbc54a79b3055807f9bf79b, type: 2}
   m_OnePrefab: {fileID: 1744711924718852477, guid: 7d287d2c98952bf47a0abdf5706f4854,
     type: 3}
-  m_TwoPrefab: {fileID: 2784674638072538995, guid: 77a4b5f2f7d214c51b92257031cf944a,
+  m_TwoPrefab: {fileID: 5722726590925913014, guid: 73ab94858c7e623429ecb69776ac0b07,
     type: 3}
 --- !u!1 &2512387470665874425
 GameObject:
