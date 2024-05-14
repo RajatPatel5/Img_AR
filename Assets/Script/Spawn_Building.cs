@@ -9,9 +9,6 @@ public class Spawn_Building : MonoBehaviour
     [Tooltip("Image manager on the AR Session Origin")]
     ARTrackedImageManager m_ImageManager;
 
-    /// <summary>
-    /// Get the <c>ARTrackedImageManager</c>
-    /// </summary>
     public ARTrackedImageManager ImageManager
     {
         get => m_ImageManager;
@@ -22,9 +19,6 @@ public class Spawn_Building : MonoBehaviour
     [Tooltip("Reference Image Library")]
     XRReferenceImageLibrary m_ImageLibrary;
 
-    /// <summary>
-    /// Get the <c>XRReferenceImageLibrary</c>
-    /// </summary>
     public XRReferenceImageLibrary ImageLibrary
     {
         get => m_ImageLibrary;
@@ -35,9 +29,6 @@ public class Spawn_Building : MonoBehaviour
     [Tooltip("Prefab for tracked 1 image")]
     GameObject m_OnePrefab;
 
-    /// <summary>
-    /// Get the one prefab
-    /// </summary>
     public GameObject onePrefab
     {
         get => m_OnePrefab;
@@ -46,9 +37,6 @@ public class Spawn_Building : MonoBehaviour
 
     GameObject m_SpawnedOnePrefab;
 
-    /// <summary>
-    /// Get the spawned one prefab
-    /// </summary>
     public GameObject spawnedOnePrefab
     {
         get => m_SpawnedOnePrefab;
@@ -59,9 +47,6 @@ public class Spawn_Building : MonoBehaviour
     [Tooltip("Prefab for tracked 2 image")]
     GameObject m_TwoPrefab;
 
-    /// <summary>
-    /// Get the two prefab
-    /// </summary>
     public GameObject twoPrefab
     {
         get => m_TwoPrefab;
@@ -70,9 +55,6 @@ public class Spawn_Building : MonoBehaviour
 
     GameObject m_SpawnedTwoPrefab;
 
-    /// <summary>
-    /// Get the spawned two prefab
-    /// </summary>
     public GameObject spawnedTwoPrefab
     {
         get => m_SpawnedTwoPrefab;
@@ -97,9 +79,35 @@ public class Spawn_Building : MonoBehaviour
 
     void ImageManagerOnTrackedImagesChanged(ARTrackedImagesChangedEventArgs obj)
     {
-        // Added, spawn prefab
-        Debug.Log("Image Searching");
+        // Handle added images
         foreach (ARTrackedImage image in obj.added)
+        {
+            UpdatePrefabForImage(image); // Use the new method to handle added images
+        }
+
+        // Handle updated images
+        foreach (ARTrackedImage image in obj.updated)
+        {
+            UpdatePrefabForImage(image); // Use the new method to handle updated images
+        }
+
+        // Handle removed images
+        foreach (ARTrackedImage image in obj.removed) // New block for handling removed images
+        {
+            if (image.referenceImage.guid == s_FirstImageGUID && m_SpawnedOnePrefab != null)
+            {
+                m_SpawnedOnePrefab.SetActive(false); // Deactivate prefab if the image is removed
+            }
+            else if (image.referenceImage.guid == s_SecondImageGUID && m_SpawnedTwoPrefab != null)
+            {
+                m_SpawnedTwoPrefab.SetActive(false); // Deactivate prefab if the image is removed
+            }
+        }
+    }
+
+    void UpdatePrefabForImage(ARTrackedImage image) 
+    {
+        if (image.trackingState == TrackingState.Tracking)
         {
             if (image.referenceImage.guid == s_FirstImageGUID)
             {
@@ -134,28 +142,16 @@ public class Spawn_Building : MonoBehaviour
                 }
             }
         }
-
-        // Updated, set prefab position and rotation
-        foreach (ARTrackedImage image in obj.updated)
+        else
         {
-            if (image.trackingState == TrackingState.Tracking)
+            if (image.referenceImage.guid == s_FirstImageGUID && m_SpawnedOnePrefab != null)
             {
-                if (image.referenceImage.guid == s_FirstImageGUID && m_SpawnedOnePrefab != null)
-                {
-                    m_SpawnedOnePrefab.SetActive(true);
-                    m_SpawnedOnePrefab.transform.SetPositionAndRotation(image.transform.position, image.transform.rotation);
-                }
-                else if (image.referenceImage.guid == s_SecondImageGUID && m_SpawnedTwoPrefab != null)
-                {
-                    m_SpawnedTwoPrefab.SetActive(true);
-                    m_SpawnedTwoPrefab.transform.SetPositionAndRotation(image.transform.position, image.transform.rotation);
-                }
-               
-
+                m_SpawnedOnePrefab.SetActive(false); // Deactivate prefab if the image is not tracking
             }
-
-           
-
+            else if (image.referenceImage.guid == s_SecondImageGUID && m_SpawnedTwoPrefab != null)
+            {
+                m_SpawnedTwoPrefab.SetActive(false); // Deactivate prefab if the image is not tracking
+            }
         }
     }
 
